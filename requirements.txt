@@ -1,0 +1,7 @@
+coverage
+pytest>6.2
+pytest-cov
+pytest-mock
+setuptools>=42
+wheel
+flake8
