@@ -4,7 +4,7 @@
 
 
 <div align="center">
-<img src="https://production-media.paperswithcode.com/methods/Screen_Shot_2020-05-31_at_10.30.20_PM.png" width="300">
+<img src="https://production-media.paperswithcode.com/methods/Screen_Shot_2020-05-31_at_10.30.20_PM.png" width="400">
 
 An illustration of Depthwise Separable Convolution. Credit: [Depthwise Convolution Is All You Need for Learning Multiple Visual Domains](https://paperswithcode.com/paper/depthwise-convolution-is-all-you-need-for).
 </div>
