@@ -60,7 +60,7 @@ class SeparableConv1d(_SeparableConv):
                  padding: Union[str, _size_1_t] = 0,
                  padding_mode: str = 'zeros',
                  dilation: _size_1_t = 1,
-                 depth_multiplier: float = 1,
+                 depth_multiplier: int = 1,
                  normalization_dw: str = 'bn',
                  normalization_pw: str = 'bn',
                  activation_dw: Callable[..., nn.Module] = nn.ReLU,
@@ -72,7 +72,7 @@ class SeparableConv1d(_SeparableConv):
 
         super(SeparableConv1d, self).__init__()
 
-        expansion_channels = max(int(in_channels * depth_multiplier), 1)
+        expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
 
         self.dwconv = nn.Conv1d(
                           in_channels, expansion_channels, kernel_size, stride=stride,
@@ -140,7 +140,7 @@ class SeparableConv2d(_SeparableConv):
                  padding: Union[str, _size_2_t] = 0,
                  padding_mode: str = 'zeros',
                  dilation: _size_2_t = 1,
-                 depth_multiplier: float = 1,
+                 depth_multiplier: int = 1,
                  normalization_dw: str = 'bn',
                  normalization_pw: str = 'bn',
                  activation_dw: Callable[..., nn.Module] = nn.ReLU,
@@ -152,7 +152,7 @@ class SeparableConv2d(_SeparableConv):
 
         super(SeparableConv2d, self).__init__()
 
-        expansion_channels = max(int(in_channels * depth_multiplier), 1)
+        expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
 
         self.dwconv = nn.Conv2d(
                           in_channels, expansion_channels, kernel_size, stride=stride,
@@ -220,7 +220,7 @@ class SeparableConv3d(_SeparableConv):
                  padding: Union[str, _size_3_t] = 0,
                  padding_mode: str = 'zeros',
                  dilation: _size_3_t = 1,
-                 depth_multiplier: float = 1,
+                 depth_multiplier: int = 1,
                  normalization_dw: str = 'bn',
                  normalization_pw: str = 'bn',
                  activation_dw: Callable[..., nn.Module] = nn.ReLU,
@@ -232,7 +232,7 @@ class SeparableConv3d(_SeparableConv):
 
         super(SeparableConv3d, self).__init__()
 
-        expansion_channels = max(int(in_channels * depth_multiplier), 1)
+        expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
 
         self.dwconv = nn.Conv3d(
                           in_channels, expansion_channels, kernel_size, stride=stride,

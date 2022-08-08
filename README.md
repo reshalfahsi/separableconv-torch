@@ -42,7 +42,7 @@ pip install separableconv-torch
 | padding | Padding added to all four sides of the input. Default: 0 | int, tuple or str, optional |
 | padding_mode | ``'zeros'``, ``'reflect'``, ``'replicate'`` or ``'circular'``. Default: ``'zeros'`` | string, optional|
 | dilation | Spacing between kernel elements. Default: 1 | int or tuple, optional |
-| depth_multiplier | The number of depthwise convolution output channels for each input channel. The total number of depthwise convolution output channels will be equal to `in_channels * depth_multiplier`. Default: 1| float, optional |
+| depth_multiplier | The number of depthwise convolution output channels for each input channel. The total number of depthwise convolution output channels will be equal to `in_channels * depth_multiplier`. Default: 1| int, optional |
 | normalization_dw | depthwise convolution normalization. Default: 'bn' | str, optional |
 | normalization_pw | pointwise convolution normalization. Default: 'bn' | str, optional |
 | activation_dw | depthwise convolution activation. Default: ``torch.nn.ReLU`` | Callable[`...`, `torch.nn.Module`], optional |
