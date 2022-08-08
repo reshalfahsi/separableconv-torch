@@ -17,7 +17,7 @@ import torch.nn as nn
 
 from torch.nn.common_types import _size_1_t, _size_2_t, _size_3_t
 
-from typing import Callable
+from typing import Callable, Union
 from separableconv.nn.base import _SeparableConv
 
 
