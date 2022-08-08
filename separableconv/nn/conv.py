@@ -82,10 +82,11 @@ class SeparableConv1d(_SeparableConv):
         self.dwconv_normalization = nn.BatchNorm1d(expansion_channels) if normalization_dw == 'bn' else \
                                     nn.InstanceNorm1d(expansion_channels) if normalization_dw == 'in' else None
 
-        warnings.warn(
-            "activation_dw is None. "
-            "Please consider using valid normalization: "
-            "'bn' for ``nn.BatchNorm1d`` or 'in' for ``nn.InstanceNorm1d``.")
+        if self.dwconv_normalization is None:
+            warnings.warn(
+                "normalization_dw is invalid. Default to ``None``. "
+                "Please consider using valid normalization: "
+                "'bn' for ``nn.BatchNorm1d`` or 'in' for ``nn.InstanceNorm1d``.")
 
 
         self.dwconv_activation = activation_dw()
@@ -98,10 +99,11 @@ class SeparableConv1d(_SeparableConv):
         self.pwconv_normalization = nn.BatchNorm1d(out_channels) if normalization_pw == 'bn' else \
                                     nn.InstanceNorm1d(out_channels) if normalization_pw == 'in' else None
 
-        warnings.warn(
-            "activation_dw is None. "
-            "Please consider using valid normalization: "
-            "'bn' for ``nn.BatchNorm1d`` or 'in' for ``nn.InstanceNorm1d``.")
+        if self.pwconv_normalization is None:
+            warnings.warn(
+                "normalization_pw is invalid. Default to ``None``. "
+                "Please consider using valid normalization: "
+                "'bn' for ``nn.BatchNorm1d`` or 'in' for ``nn.InstanceNorm1d``.")
 
         self.pwconv_activation = activation_pw()
 
@@ -162,10 +164,11 @@ class SeparableConv2d(_SeparableConv):
         self.dwconv_normalization = nn.BatchNorm2d(expansion_channels) if normalization_dw == 'bn' else \
                                     nn.InstanceNorm2d(expansion_channels) if normalization_dw == 'in' else None
 
-        warnings.warn(
-            "activation_dw is None. "
-            "Please consider using valid normalization: "
-            "'bn' for ``nn.BatchNorm2d`` or 'in' for ``nn.InstanceNorm2d``.")
+        if self.dwconv_normalization is None:
+            warnings.warn(
+                "normalization_dw is invalid. Default to ``None``. "
+                "Please consider using valid normalization: "
+                "'bn' for ``nn.BatchNorm2d`` or 'in' for ``nn.InstanceNorm2d``.")
 
 
         self.dwconv_activation = activation_dw()
@@ -178,10 +181,11 @@ class SeparableConv2d(_SeparableConv):
         self.pwconv_normalization = nn.BatchNorm2d(out_channels) if normalization_pw == 'bn' else \
                                     nn.InstanceNorm2d(out_channels) if normalization_pw == 'in' else None
 
-        warnings.warn(
-            "activation_dw is None. "
-            "Please consider using valid normalization: "
-            "'bn' for ``nn.BatchNorm2d`` or 'in' for ``nn.InstanceNorm2d``.")
+        if self.pwconv_normalization is None:
+            warnings.warn(
+                "normalization_pw is invalid. Default to ``None``. "
+                "Please consider using valid normalization: "
+                "'bn' for ``nn.BatchNorm2d`` or 'in' for ``nn.InstanceNorm2d``.")
 
         self.pwconv_activation = activation_pw()
 
@@ -242,10 +246,11 @@ class SeparableConv3d(_SeparableConv):
         self.dwconv_normalization = nn.BatchNorm3d(expansion_channels) if normalization_dw == 'bn' else \
                                     nn.InstanceNorm3d(expansion_channels) if normalization_dw == 'in' else None
 
-        warnings.warn(
-            "activation_dw is None. "
-            "Please consider using valid normalization: "
-            "'bn' for ``nn.BatchNorm3d`` or 'in' for ``nn.InstanceNorm3d``.")
+        if self.dwconv_normalization is None:
+            warnings.warn(
+                "normalization_dw is invalid. Default to ``None``. "
+                "Please consider using valid normalization: "
+                "'bn' for ``nn.BatchNorm3d`` or 'in' for ``nn.InstanceNorm3d``.")
 
 
         self.dwconv_activation = activation_dw()
@@ -258,9 +263,10 @@ class SeparableConv3d(_SeparableConv):
         self.pwconv_normalization = nn.BatchNorm3d(out_channels) if normalization_pw == 'bn' else \
                                     nn.InstanceNorm3d(out_channels) if normalization_pw == 'in' else None
 
-        warnings.warn(
-            "activation_dw is None. "
-            "Please consider using valid normalization: "
-            "'bn' for ``nn.BatchNorm3d`` or 'in' for ``nn.InstanceNorm3d``.")
+        if self.pwconv_normalization is None:
+            warnings.warn(
+                "normalization_pw is invalid. Default to ``None``. "
+                "Please consider using valid normalization: "
+                "'bn' for ``nn.BatchNorm3d`` or 'in' for ``nn.InstanceNorm3d``.")
 
         self.pwconv_activation = activation_pw()
