@@ -45,5 +45,5 @@ def test_separableconv3d():
     assert output.shape == torch.Size([4, 30, 100, 100, 100])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main([__file__])

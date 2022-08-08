@@ -12,10 +12,6 @@
 # ==============================================================================
 
 
-from .conv import (
-    SeparableConv1d,
-    SeparableConv2d,
-    SeparableConv3d
-)
+from .conv import SeparableConv1d, SeparableConv2d, SeparableConv3d
 
 from torch.nn import *

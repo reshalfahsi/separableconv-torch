@@ -53,30 +53,28 @@ class SeparableConv1d(_SeparableConv):
             output. Default: ``True``
     """
 
-    def __init__(self,
-                 in_channels: int,
-                 out_channels: int,
-                 kernel_size: _size_1_t,
-                 stride: _size_1_t = 1,
-                 padding: Union[str, _size_1_t] = 0,
-                 padding_mode: str = 'zeros',
-                 dilation: _size_1_t = 1,
-                 depth_multiplier: int = 1,
-                 normalization_dw: str = 'bn',
-                 normalization_pw: str = 'bn',
-                 activation_dw: Callable[..., nn.Module] = nn.ReLU,
-                 activation_pw: Callable[..., nn.Module] = nn.ReLU,
-                 bias=True,
-                 device=None,
-                 dtype=None
-                 ) -> None:
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        kernel_size: _size_1_t,
+        stride: _size_1_t = 1,
+        padding: Union[str, _size_1_t] = 0,
+        padding_mode: str = "zeros",
+        dilation: _size_1_t = 1,
+        depth_multiplier: int = 1,
+        normalization_dw: str = "bn",
+        normalization_pw: str = "bn",
+        activation_dw: Callable[..., nn.Module] = nn.ReLU,
+        activation_pw: Callable[..., nn.Module] = nn.ReLU,
+        bias=True,
+        device=None,
+        dtype=None,
+    ) -> None:
 
         super(SeparableConv1d, self).__init__()
 
-        expansion_channels = max(
-            in_channels *
-            int(depth_multiplier),
-            in_channels)
+        expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
 
         self.dwconv = nn.Conv1d(
             in_channels,
@@ -89,31 +87,50 @@ class SeparableConv1d(_SeparableConv):
             bias=bias,
             padding_mode=padding_mode,
             device=device,
-            dtype=dtype)
+            dtype=dtype,
+        )
 
-        self.dwconv_normalization = nn.BatchNorm1d(expansion_channels) if normalization_dw == 'bn' else \
-            nn.InstanceNorm1d(expansion_channels) if normalization_dw == 'in' else None
+        self.dwconv_normalization = (
+            nn.BatchNorm1d(expansion_channels)
+            if normalization_dw == "bn"
+            else nn.InstanceNorm1d(expansion_channels)
+            if normalization_dw == "in"
+            else None
+        )
 
         if self.dwconv_normalization is None:
             warnings.warn(
                 "normalization_dw is invalid. Default to ``None``. "
                 "Please consider using valid normalization: "
-                "'bn' for ``nn.BatchNorm1d`` or 'in' for ``nn.InstanceNorm1d``.")
+                "'bn' for ``nn.BatchNorm1d`` or 'in' for ``nn.InstanceNorm1d``."
+            )
 
         self.dwconv_activation = activation_dw()
 
         self.pwconv = nn.Conv1d(
-            expansion_channels, out_channels, 1, bias=bias,
-            padding_mode=padding_mode, device=device, dtype=dtype)
+            expansion_channels,
+            out_channels,
+            1,
+            bias=bias,
+            padding_mode=padding_mode,
+            device=device,
+            dtype=dtype,
+        )
 
-        self.pwconv_normalization = nn.BatchNorm1d(out_channels) if normalization_pw == 'bn' else \
-            nn.InstanceNorm1d(out_channels) if normalization_pw == 'in' else None
+        self.pwconv_normalization = (
+            nn.BatchNorm1d(out_channels)
+            if normalization_pw == "bn"
+            else nn.InstanceNorm1d(out_channels)
+            if normalization_pw == "in"
+            else None
+        )
 
         if self.pwconv_normalization is None:
             warnings.warn(
                 "normalization_pw is invalid. Default to ``None``. "
                 "Please consider using valid normalization: "
-                "'bn' for ``nn.BatchNorm1d`` or 'in' for ``nn.InstanceNorm1d``.")
+                "'bn' for ``nn.BatchNorm1d`` or 'in' for ``nn.InstanceNorm1d``."
+            )
 
         self.pwconv_activation = activation_pw()
 
@@ -145,30 +162,28 @@ class SeparableConv2d(_SeparableConv):
             output. Default: ``True``
     """
 
-    def __init__(self,
-                 in_channels: int,
-                 out_channels: int,
-                 kernel_size: _size_2_t,
-                 stride: _size_2_t = 1,
-                 padding: Union[str, _size_2_t] = 0,
-                 padding_mode: str = 'zeros',
-                 dilation: _size_2_t = 1,
-                 depth_multiplier: int = 1,
-                 normalization_dw: str = 'bn',
-                 normalization_pw: str = 'bn',
-                 activation_dw: Callable[..., nn.Module] = nn.ReLU,
-                 activation_pw: Callable[..., nn.Module] = nn.ReLU,
-                 bias=True,
-                 device=None,
-                 dtype=None
-                 ) -> None:
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        kernel_size: _size_2_t,
+        stride: _size_2_t = 1,
+        padding: Union[str, _size_2_t] = 0,
+        padding_mode: str = "zeros",
+        dilation: _size_2_t = 1,
+        depth_multiplier: int = 1,
+        normalization_dw: str = "bn",
+        normalization_pw: str = "bn",
+        activation_dw: Callable[..., nn.Module] = nn.ReLU,
+        activation_pw: Callable[..., nn.Module] = nn.ReLU,
+        bias=True,
+        device=None,
+        dtype=None,
+    ) -> None:
 
         super(SeparableConv2d, self).__init__()
 
-        expansion_channels = max(
-            in_channels *
-            int(depth_multiplier),
-            in_channels)
+        expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
 
         self.dwconv = nn.Conv2d(
             in_channels,
@@ -181,31 +196,50 @@ class SeparableConv2d(_SeparableConv):
             bias=bias,
             padding_mode=padding_mode,
             device=device,
-            dtype=dtype)
+            dtype=dtype,
+        )
 
-        self.dwconv_normalization = nn.BatchNorm2d(expansion_channels) if normalization_dw == 'bn' else \
-            nn.InstanceNorm2d(expansion_channels) if normalization_dw == 'in' else None
+        self.dwconv_normalization = (
+            nn.BatchNorm2d(expansion_channels)
+            if normalization_dw == "bn"
+            else nn.InstanceNorm2d(expansion_channels)
+            if normalization_dw == "in"
+            else None
+        )
 
         if self.dwconv_normalization is None:
             warnings.warn(
                 "normalization_dw is invalid. Default to ``None``. "
                 "Please consider using valid normalization: "
-                "'bn' for ``nn.BatchNorm2d`` or 'in' for ``nn.InstanceNorm2d``.")
+                "'bn' for ``nn.BatchNorm2d`` or 'in' for ``nn.InstanceNorm2d``."
+            )
 
         self.dwconv_activation = activation_dw()
 
         self.pwconv = nn.Conv2d(
-            expansion_channels, out_channels, 1, bias=bias,
-            padding_mode=padding_mode, device=device, dtype=dtype)
+            expansion_channels,
+            out_channels,
+            1,
+            bias=bias,
+            padding_mode=padding_mode,
+            device=device,
+            dtype=dtype,
+        )
 
-        self.pwconv_normalization = nn.BatchNorm2d(out_channels) if normalization_pw == 'bn' else \
-            nn.InstanceNorm2d(out_channels) if normalization_pw == 'in' else None
+        self.pwconv_normalization = (
+            nn.BatchNorm2d(out_channels)
+            if normalization_pw == "bn"
+            else nn.InstanceNorm2d(out_channels)
+            if normalization_pw == "in"
+            else None
+        )
 
         if self.pwconv_normalization is None:
             warnings.warn(
                 "normalization_pw is invalid. Default to ``None``. "
                 "Please consider using valid normalization: "
-                "'bn' for ``nn.BatchNorm2d`` or 'in' for ``nn.InstanceNorm2d``.")
+                "'bn' for ``nn.BatchNorm2d`` or 'in' for ``nn.InstanceNorm2d``."
+            )
 
         self.pwconv_activation = activation_pw()
 
@@ -237,30 +271,28 @@ class SeparableConv3d(_SeparableConv):
             output. Default: ``True``
     """
 
-    def __init__(self,
-                 in_channels: int,
-                 out_channels: int,
-                 kernel_size: _size_3_t,
-                 stride: _size_3_t = 1,
-                 padding: Union[str, _size_3_t] = 0,
-                 padding_mode: str = 'zeros',
-                 dilation: _size_3_t = 1,
-                 depth_multiplier: int = 1,
-                 normalization_dw: str = 'bn',
-                 normalization_pw: str = 'bn',
-                 activation_dw: Callable[..., nn.Module] = nn.ReLU,
-                 activation_pw: Callable[..., nn.Module] = nn.ReLU,
-                 bias=True,
-                 device=None,
-                 dtype=None
-                 ) -> None:
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        kernel_size: _size_3_t,
+        stride: _size_3_t = 1,
+        padding: Union[str, _size_3_t] = 0,
+        padding_mode: str = "zeros",
+        dilation: _size_3_t = 1,
+        depth_multiplier: int = 1,
+        normalization_dw: str = "bn",
+        normalization_pw: str = "bn",
+        activation_dw: Callable[..., nn.Module] = nn.ReLU,
+        activation_pw: Callable[..., nn.Module] = nn.ReLU,
+        bias=True,
+        device=None,
+        dtype=None,
+    ) -> None:
 
         super(SeparableConv3d, self).__init__()
 
-        expansion_channels = max(
-            in_channels *
-            int(depth_multiplier),
-            in_channels)
+        expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
 
         self.dwconv = nn.Conv3d(
             in_channels,
@@ -273,30 +305,49 @@ class SeparableConv3d(_SeparableConv):
             bias=bias,
             padding_mode=padding_mode,
             device=device,
-            dtype=dtype)
+            dtype=dtype,
+        )
 
-        self.dwconv_normalization = nn.BatchNorm3d(expansion_channels) if normalization_dw == 'bn' else \
-            nn.InstanceNorm3d(expansion_channels) if normalization_dw == 'in' else None
+        self.dwconv_normalization = (
+            nn.BatchNorm3d(expansion_channels)
+            if normalization_dw == "bn"
+            else nn.InstanceNorm3d(expansion_channels)
+            if normalization_dw == "in"
+            else None
+        )
 
         if self.dwconv_normalization is None:
             warnings.warn(
                 "normalization_dw is invalid. Default to ``None``. "
                 "Please consider using valid normalization: "
-                "'bn' for ``nn.BatchNorm3d`` or 'in' for ``nn.InstanceNorm3d``.")
+                "'bn' for ``nn.BatchNorm3d`` or 'in' for ``nn.InstanceNorm3d``."
+            )
 
         self.dwconv_activation = activation_dw()
 
         self.pwconv = nn.Conv3d(
-            expansion_channels, out_channels, 1, bias=bias,
-            padding_mode=padding_mode, device=device, dtype=dtype)
+            expansion_channels,
+            out_channels,
+            1,
+            bias=bias,
+            padding_mode=padding_mode,
+            device=device,
+            dtype=dtype,
+        )
 
-        self.pwconv_normalization = nn.BatchNorm3d(out_channels) if normalization_pw == 'bn' else \
-            nn.InstanceNorm3d(out_channels) if normalization_pw == 'in' else None
+        self.pwconv_normalization = (
+            nn.BatchNorm3d(out_channels)
+            if normalization_pw == "bn"
+            else nn.InstanceNorm3d(out_channels)
+            if normalization_pw == "in"
+            else None
+        )
 
         if self.pwconv_normalization is None:
             warnings.warn(
                 "normalization_pw is invalid. Default to ``None``. "
                 "Please consider using valid normalization: "
-                "'bn' for ``nn.BatchNorm3d`` or 'in' for ``nn.InstanceNorm3d``.")
+                "'bn' for ``nn.BatchNorm3d`` or 'in' for ``nn.InstanceNorm3d``."
+            )
 
         self.pwconv_activation = activation_pw()
