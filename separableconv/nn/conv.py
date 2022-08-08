@@ -71,7 +71,6 @@ class SeparableConv1d(_SeparableConv):
         device=None,
         dtype=None,
     ) -> None:
-
         super(SeparableConv1d, self).__init__()
 
         expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
@@ -180,7 +179,6 @@ class SeparableConv2d(_SeparableConv):
         device=None,
         dtype=None,
     ) -> None:
-
         super(SeparableConv2d, self).__init__()
 
         expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
@@ -289,7 +287,6 @@ class SeparableConv3d(_SeparableConv):
         device=None,
         dtype=None,
     ) -> None:
-
         super(SeparableConv3d, self).__init__()
 
         expansion_channels = max(in_channels * int(depth_multiplier), in_channels)

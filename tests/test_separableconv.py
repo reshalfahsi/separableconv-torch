@@ -19,7 +19,6 @@ import separableconv.nn as nn
 
 
 def test_separableconv1d():
-
     input = torch.randn(4, 10, 100)
     m = nn.SeparableConv1d(10, 30, 3, padding=1)
     output = m(input)
@@ -28,7 +27,6 @@ def test_separableconv1d():
 
 
 def test_separableconv2d():
-
     input = torch.randn(4, 10, 100, 100)
     m = nn.SeparableConv2d(10, 30, 3, padding=1)
     output = m(input)
@@ -37,7 +35,6 @@ def test_separableconv2d():
 
 
 def test_separableconv3d():
-
     input = torch.randn(4, 10, 100, 100, 100)
     m = nn.SeparableConv3d(10, 30, 3, padding=1)
     output = m(input)
