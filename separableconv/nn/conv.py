@@ -1,5 +1,5 @@
 # MIT License
-# 
+#
 # Copyright (c) 2022 Resha Dwika Hefni Al-Fahsi
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -52,6 +52,7 @@ class SeparableConv1d(_SeparableConv):
         bias (bool, optional): If ``True``, adds a learnable bias to the
             output. Default: ``True``
     """
+
     def __init__(self,
                  in_channels: int,
                  out_channels: int,
@@ -68,19 +69,30 @@ class SeparableConv1d(_SeparableConv):
                  bias=True,
                  device=None,
                  dtype=None
-    ) -> None:
+                 ) -> None:
 
         super(SeparableConv1d, self).__init__()
 
-        expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
+        expansion_channels = max(
+            in_channels *
+            int(depth_multiplier),
+            in_channels)
 
         self.dwconv = nn.Conv1d(
-                          in_channels, expansion_channels, kernel_size, stride=stride,
-                          padding=padding, dilation=dilation, groups=in_channels, bias=bias, padding_mode=padding_mode,
-                          device=device, dtype=dtype)
+            in_channels,
+            expansion_channels,
+            kernel_size,
+            stride=stride,
+            padding=padding,
+            dilation=dilation,
+            groups=in_channels,
+            bias=bias,
+            padding_mode=padding_mode,
+            device=device,
+            dtype=dtype)
 
         self.dwconv_normalization = nn.BatchNorm1d(expansion_channels) if normalization_dw == 'bn' else \
-                                    nn.InstanceNorm1d(expansion_channels) if normalization_dw == 'in' else None
+            nn.InstanceNorm1d(expansion_channels) if normalization_dw == 'in' else None
 
         if self.dwconv_normalization is None:
             warnings.warn(
@@ -88,16 +100,14 @@ class SeparableConv1d(_SeparableConv):
                 "Please consider using valid normalization: "
                 "'bn' for ``nn.BatchNorm1d`` or 'in' for ``nn.InstanceNorm1d``.")
 
-
         self.dwconv_activation = activation_dw()
 
-
         self.pwconv = nn.Conv1d(
-                          expansion_channels, out_channels, 1, bias=bias, 
-                          padding_mode=padding_mode, device=device, dtype=dtype)
+            expansion_channels, out_channels, 1, bias=bias,
+            padding_mode=padding_mode, device=device, dtype=dtype)
 
         self.pwconv_normalization = nn.BatchNorm1d(out_channels) if normalization_pw == 'bn' else \
-                                    nn.InstanceNorm1d(out_channels) if normalization_pw == 'in' else None
+            nn.InstanceNorm1d(out_channels) if normalization_pw == 'in' else None
 
         if self.pwconv_normalization is None:
             warnings.warn(
@@ -134,6 +144,7 @@ class SeparableConv2d(_SeparableConv):
         bias (bool, optional): If ``True``, adds a learnable bias to the
             output. Default: ``True``
     """
+
     def __init__(self,
                  in_channels: int,
                  out_channels: int,
@@ -150,19 +161,30 @@ class SeparableConv2d(_SeparableConv):
                  bias=True,
                  device=None,
                  dtype=None
-    ) -> None:
+                 ) -> None:
 
         super(SeparableConv2d, self).__init__()
 
-        expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
+        expansion_channels = max(
+            in_channels *
+            int(depth_multiplier),
+            in_channels)
 
         self.dwconv = nn.Conv2d(
-                          in_channels, expansion_channels, kernel_size, stride=stride,
-                          padding=padding, dilation=dilation, groups=in_channels, bias=bias, padding_mode=padding_mode,
-                          device=device, dtype=dtype)
+            in_channels,
+            expansion_channels,
+            kernel_size,
+            stride=stride,
+            padding=padding,
+            dilation=dilation,
+            groups=in_channels,
+            bias=bias,
+            padding_mode=padding_mode,
+            device=device,
+            dtype=dtype)
 
         self.dwconv_normalization = nn.BatchNorm2d(expansion_channels) if normalization_dw == 'bn' else \
-                                    nn.InstanceNorm2d(expansion_channels) if normalization_dw == 'in' else None
+            nn.InstanceNorm2d(expansion_channels) if normalization_dw == 'in' else None
 
         if self.dwconv_normalization is None:
             warnings.warn(
@@ -170,16 +192,14 @@ class SeparableConv2d(_SeparableConv):
                 "Please consider using valid normalization: "
                 "'bn' for ``nn.BatchNorm2d`` or 'in' for ``nn.InstanceNorm2d``.")
 
-
         self.dwconv_activation = activation_dw()
 
-
         self.pwconv = nn.Conv2d(
-                          expansion_channels, out_channels, 1, bias=bias, 
-                          padding_mode=padding_mode, device=device, dtype=dtype)
+            expansion_channels, out_channels, 1, bias=bias,
+            padding_mode=padding_mode, device=device, dtype=dtype)
 
         self.pwconv_normalization = nn.BatchNorm2d(out_channels) if normalization_pw == 'bn' else \
-                                    nn.InstanceNorm2d(out_channels) if normalization_pw == 'in' else None
+            nn.InstanceNorm2d(out_channels) if normalization_pw == 'in' else None
 
         if self.pwconv_normalization is None:
             warnings.warn(
@@ -216,6 +236,7 @@ class SeparableConv3d(_SeparableConv):
         bias (bool, optional): If ``True``, adds a learnable bias to the
             output. Default: ``True``
     """
+
     def __init__(self,
                  in_channels: int,
                  out_channels: int,
@@ -232,19 +253,30 @@ class SeparableConv3d(_SeparableConv):
                  bias=True,
                  device=None,
                  dtype=None
-    ) -> None:
+                 ) -> None:
 
         super(SeparableConv3d, self).__init__()
 
-        expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
+        expansion_channels = max(
+            in_channels *
+            int(depth_multiplier),
+            in_channels)
 
         self.dwconv = nn.Conv3d(
-                          in_channels, expansion_channels, kernel_size, stride=stride,
-                          padding=padding, dilation=dilation, groups=in_channels, bias=bias, padding_mode=padding_mode,
-                          device=device, dtype=dtype)
+            in_channels,
+            expansion_channels,
+            kernel_size,
+            stride=stride,
+            padding=padding,
+            dilation=dilation,
+            groups=in_channels,
+            bias=bias,
+            padding_mode=padding_mode,
+            device=device,
+            dtype=dtype)
 
         self.dwconv_normalization = nn.BatchNorm3d(expansion_channels) if normalization_dw == 'bn' else \
-                                    nn.InstanceNorm3d(expansion_channels) if normalization_dw == 'in' else None
+            nn.InstanceNorm3d(expansion_channels) if normalization_dw == 'in' else None
 
         if self.dwconv_normalization is None:
             warnings.warn(
@@ -252,16 +284,14 @@ class SeparableConv3d(_SeparableConv):
                 "Please consider using valid normalization: "
                 "'bn' for ``nn.BatchNorm3d`` or 'in' for ``nn.InstanceNorm3d``.")
 
-
         self.dwconv_activation = activation_dw()
 
-
         self.pwconv = nn.Conv3d(
-                          expansion_channels, out_channels, 1, bias=bias, 
-                          padding_mode=padding_mode, device=device, dtype=dtype)
+            expansion_channels, out_channels, 1, bias=bias,
+            padding_mode=padding_mode, device=device, dtype=dtype)
 
         self.pwconv_normalization = nn.BatchNorm3d(out_channels) if normalization_pw == 'bn' else \
-                                    nn.InstanceNorm3d(out_channels) if normalization_pw == 'in' else None
+            nn.InstanceNorm3d(out_channels) if normalization_pw == 'in' else None
 
         if self.pwconv_normalization is None:
             warnings.warn(

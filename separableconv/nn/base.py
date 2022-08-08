@@ -1,5 +1,5 @@
 # MIT License
-# 
+#
 # Copyright (c) 2022 Resha Dwika Hefni Al-Fahsi
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -40,7 +40,6 @@ class _SeparableConv(nn.Module):
         if self.dwconv_activation is not None:
             x = self.dwconv_activation(x)
 
-
         x = self.pwconv(x)
 
         if self.pwconv_normalization is not None:
@@ -48,6 +47,5 @@ class _SeparableConv(nn.Module):
 
         if self.dwconv_activation is not None:
             x = self.pwconv_activation(x)
-
 
         return x

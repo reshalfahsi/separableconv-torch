@@ -1,5 +1,5 @@
 # MIT License
-# 
+#
 # Copyright (c) 2022 Resha Dwika Hefni Al-Fahsi
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -47,4 +47,3 @@ def test_separableconv3d():
 
 if __name__ == '__main__':
     pytest.main([__file__])
-

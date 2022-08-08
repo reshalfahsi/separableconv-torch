@@ -1,5 +1,5 @@
 # MIT License
-# 
+#
 # Copyright (c) 2022 Resha Dwika Hefni Al-Fahsi
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
