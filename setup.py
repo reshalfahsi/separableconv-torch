@@ -53,7 +53,9 @@ setup(
     url="https://github.com/reshalfahsi/separableconv-torch",
     packages=find_packages(exclude=["tests"]),
     python_requires='>={}'.format(python_min_version_str),
-    install_requires=['torch',],
+    install_requires=['numpy',
+                      'torch',
+                      'torchvision',],
     include_package_data=True,
     classifiers=[
         'Development Status :: 4 - Beta',

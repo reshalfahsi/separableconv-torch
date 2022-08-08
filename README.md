@@ -4,10 +4,18 @@
 
 
 <div align="center">
+<img src="https://production-media.paperswithcode.com/methods/Screen_Shot_2020-05-31_at_10.30.20_PM.png" width="300">
+
+An illustration of Depthwise Separable Convolution. Credit: [Depthwise Convolution Is All You Need for Learning Multiple Visual Domains](https://paperswithcode.com/paper/depthwise-convolution-is-all-you-need-for).
+</div>
+
+
+<div align="center">
   <a href="https://pepy.tech/project/separableconv-torch"><img src="https://pepy.tech/badge/separableconv-torch" alt="total downloads"></a>
   <a href="https://pepy.tech/project/separableconv-torch"><img src="https://pepy.tech/badge/separableconv-torch/month" alt="monthly downloads"></a>
   <a href="https://github.com/reshalfahsi/separableconv-torch/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="license"></a>
   <a href="https://badge.fury.io/py/separableconv-torch"><img src="https://badge.fury.io/py/separableconv-torch.svg" alt="pypi version"></a>
+  <a href="https://github.com/reshalfahsi/separableconv-torch/actions/workflows/ci.yml"><img src="https://github.com/reshalfahsi/separableconv-torch/actions/workflows/ci.yml/badge.svg" alt="ci testing"></a>
   <a href="https://github.com/reshalfahsi/separableconv-torch/actions/workflows/package.yml"><img src="https://github.com/reshalfahsi/separableconv-torch/actions/workflows/package.yml/badge.svg" alt="package testing"></a>
 </div>
 
