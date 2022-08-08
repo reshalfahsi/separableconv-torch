@@ -41,7 +41,7 @@ class SeparableConv1d(_SeparableConv):
         padding_mode (string, optional): ``'zeros'``, ``'reflect'``,
             ``'replicate'`` or ``'circular'``. Default: ``'zeros'``
         dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
-        depth_multiplier (float, optional): The number of depthwise convolution output channels
+        depth_multiplier (int, optional): The number of depthwise convolution output channels
             for each input channel.
             The total number of depthwise convolution output
             channels will be equal to `in_channels * depth_multiplier`. Default: 1
@@ -121,7 +121,7 @@ class SeparableConv2d(_SeparableConv):
         padding_mode (string, optional): ``'zeros'``, ``'reflect'``,
             ``'replicate'`` or ``'circular'``. Default: ``'zeros'``
         dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
-        depth_multiplier (float, optional): The number of depthwise convolution output channels
+        depth_multiplier (int, optional): The number of depthwise convolution output channels
             for each input channel.
             The total number of depthwise convolution output
             channels will be equal to `in_channels * depth_multiplier`. Default: 1
@@ -201,7 +201,7 @@ class SeparableConv3d(_SeparableConv):
         padding_mode (string, optional): ``'zeros'``, ``'reflect'``,
             ``'replicate'`` or ``'circular'``. Default: ``'zeros'``
         dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
-        depth_multiplier (float, optional): The number of depthwise convolution output channels
+        depth_multiplier (int, optional): The number of depthwise convolution output channels
             for each input channel.
             The total number of depthwise convolution output
             channels will be equal to `in_channels * depth_multiplier`. Default: 1
