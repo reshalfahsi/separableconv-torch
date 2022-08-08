@@ -30,8 +30,8 @@ class _SeparableConv(nn.Module):
 
     def forward(self, x):
 
-        assert self.dwconv is not None and self.pwconv is not None, "Depthwise Convolution and/or Pointwise Convolution"
-                                                                    " is/are not implemented yet."
+        assert self.dwconv is not None and self.pwconv is not None, "Depthwise Convolution and/or Pointwise Convolution is/are not implemented yet."
+
         x = self.dwconv(x)
 
         if self.dwconv_normalization is not None:
