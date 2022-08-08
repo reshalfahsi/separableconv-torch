@@ -37,9 +37,9 @@ jobs:
           pip install wheel
           pip install -r requirements.txt
       - name: Lint Python code
-        run: flake8 . --count --ignore=W503,E203 --exclude .git,dist,doc,build,vendors --show-source --statistics --max-line-length 100
+        run: flake8 . --count --ignore=W503,E203,W504,F403,F401,E501 --exclude .git,dist,doc,build,vendors --show-source --statistics
       - name: Check Python formatting
-        run: black separableconv tests --preview --diff --check --line-length 100
+        run: black separableconv tests --preview --diff --check
 
   build:
     needs: [lint-python]
