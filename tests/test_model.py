@@ -32,7 +32,7 @@ def test_model2d():
             nn.SeparableConv2d(40, 48, 3, padding=1, stride=2),
         )
     except Exception as e:
-        error_message = e
+        error_message = str(e)
 
     assert error_message == "depth_multiplier must be integer>=1"
 
