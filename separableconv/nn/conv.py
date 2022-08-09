@@ -76,7 +76,7 @@ class SeparableConv1d(_SeparableConv):
         expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
 
         if in_channels * depth_multiplier != expansion_channels:
-            warnings.warn("Invalid depth_multiplier value. Expected integer value >=1")
+            raise ValueError("depth_multiplier must be integer>=1")
 
         self.dwconv = nn.Conv1d(
             in_channels,
@@ -187,7 +187,7 @@ class SeparableConv2d(_SeparableConv):
         expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
 
         if in_channels * depth_multiplier != expansion_channels:
-            warnings.warn("Invalid depth_multiplier value. Expected integer value >=1")
+            raise ValueError("depth_multiplier must be integer>=1")
 
         self.dwconv = nn.Conv2d(
             in_channels,
@@ -298,7 +298,7 @@ class SeparableConv3d(_SeparableConv):
         expansion_channels = max(in_channels * int(depth_multiplier), in_channels)
 
         if in_channels * depth_multiplier != expansion_channels:
-            warnings.warn("Invalid depth_multiplier value. Expected integer value >=1")
+            raise ValueError("depth_multiplier must be integer>=1")
 
         self.dwconv = nn.Conv3d(
             in_channels,

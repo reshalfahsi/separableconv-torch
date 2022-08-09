@@ -21,11 +21,26 @@ import separableconv.nn as nn
 def test_model2d():
     input = torch.randn(10, 3, 224, 224)
 
+    error_message = ""
+
+    try:
+        model = nn.Sequential(
+            nn.Conv2d(3, 16, 3, padding=1, stride=2),
+            nn.SeparableConv2d(16, 24, 3, padding=1, stride=2, depth_multiplier=2),
+            nn.SeparableConv2d(24, 32, 3, padding=1, stride=2),
+            nn.SeparableConv2d(32, 40, 3, padding=1, stride=2, depth_multiplier=0.5),
+            nn.SeparableConv2d(40, 48, 3, padding=1, stride=2),
+        )
+    except Exception as e:
+        error_message = e
+
+    assert error_message == "depth_multiplier must be integer>=1"
+
     model = nn.Sequential(
         nn.Conv2d(3, 16, 3, padding=1, stride=2),
         nn.SeparableConv2d(16, 24, 3, padding=1, stride=2, depth_multiplier=2),
         nn.SeparableConv2d(24, 32, 3, padding=1, stride=2),
-        nn.SeparableConv2d(32, 40, 3, padding=1, stride=2, depth_multiplier=0.5),
+        nn.SeparableConv2d(32, 40, 3, padding=1, stride=2, depth_multiplier=3),
         nn.SeparableConv2d(40, 48, 3, padding=1, stride=2),
     )
 
