@@ -15,6 +15,7 @@
 import warnings
 import torch.nn as nn
 
+from torch import Tensor
 from torch.nn.parameter import UninitializedParameter
 from torch.nn.modules.lazy import LazyModuleMixin
 from torch.nn.common_types import _size_1_t, _size_2_t, _size_3_t
@@ -47,10 +48,10 @@ class _LazyDepthwiseConvXdMixin(LazyModuleMixin):
     def initialize_parameters(self, input) -> None:  # type: ignore[override]
         # defined by parent class but using a protocol
         if self.has_uninitialized_params():  # type: ignore[misc]
-            self.in_channels = input.shape[1]
+            self.in_channels = self._get_in_channels(input)
             depth_multiplier = self.out_channels
             self.out_channels = max(
-                input.shape[1] * int(depth_multiplier), input.shape[1]
+                self.in_channels * int(depth_multiplier), self.in_channels
             )
             warnings.warn(
                 "{}, {}, {}".format(
@@ -59,7 +60,7 @@ class _LazyDepthwiseConvXdMixin(LazyModuleMixin):
             )
             if self.in_channels * depth_multiplier != self.out_channels:
                 raise ValueError("depth_multiplier must be integer>=1")
-            self.groups = input.shape[1]
+            self.groups = self.in_channels
             assert isinstance(self.weight, UninitializedParameter)
             self.weight.materialize(
                 (self.out_channels, self.in_channels // self.groups, *self.kernel_size)
@@ -68,6 +69,28 @@ class _LazyDepthwiseConvXdMixin(LazyModuleMixin):
                 assert isinstance(self.bias, UninitializedParameter)
                 self.bias.materialize((self.out_channels,))
             self.reset_parameters()
+
+    # Function to extract in_channels from first input.
+    def _get_in_channels(self, input: Tensor) -> int:
+        num_spatial_dims = self._get_num_spatial_dims()
+        num_dims_no_batch = num_spatial_dims + 1  # +1 for channels dim
+        num_dims_batch = num_dims_no_batch + 1
+        if input.dim() not in (num_dims_no_batch, num_dims_batch):
+            raise RuntimeError(
+                "Expected {}D (unbatched) or {}D (batched) input to {}, but "
+                "got input of size: {}".format(
+                    num_dims_no_batch,
+                    num_dims_batch,
+                    self.__class__.__name__,
+                    input.shape,
+                )
+            )
+        return input.shape[1] if input.dim() == num_dims_batch else input.shape[0]
+
+    # Function to return the number of spatial dims expected for inputs to the module.
+    # This is expected to be implemented by subclasses.
+    def _get_num_spatial_dims(self) -> int:
+        raise NotImplementedError()
 
 
 class LazyDepthwiseConv1d(_LazyDepthwiseConvXdMixin, nn.Conv1d):  # type: ignore[misc]
@@ -127,6 +150,9 @@ class LazyDepthwiseConv1d(_LazyDepthwiseConvXdMixin, nn.Conv1d):  # type: ignore
         if bias:
             self.bias = UninitializedParameter(**factory_kwargs)
 
+    def _get_num_spatial_dims(self) -> int:
+        return 1
+
 
 class LazyDepthwiseConv2d(_LazyDepthwiseConvXdMixin, nn.Conv2d):  # type: ignore[misc]
     r"""A LazyDepthwiseConv2d module.
@@ -185,6 +211,9 @@ class LazyDepthwiseConv2d(_LazyDepthwiseConvXdMixin, nn.Conv2d):  # type: ignore
         if bias:
             self.bias = UninitializedParameter(**factory_kwargs)
 
+    def _get_num_spatial_dims(self) -> int:
+        return 2
+
 
 class LazyDepthwiseConv3d(_LazyDepthwiseConvXdMixin, nn.Conv3d):  # type: ignore[misc]
     r"""A LazyDepthwiseConv3d module.
@@ -242,6 +271,9 @@ class LazyDepthwiseConv3d(_LazyDepthwiseConvXdMixin, nn.Conv3d):  # type: ignore
         self.out_channels = depth_multiplier
         if bias:
             self.bias = UninitializedParameter(**factory_kwargs)
+
+    def _get_num_spatial_dims(self) -> int:
+        return 3
 
 
 class LazySeparableConv1d(_SeparableConv):
