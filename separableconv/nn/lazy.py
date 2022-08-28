@@ -54,8 +54,9 @@ class _LazyDepthwiseConvXdMixin(LazyModuleMixin):
                 raise ValueError("depth_multiplier must be integer>=1")
             self.groups = input.shape[1]
             assert isinstance(self.weight, UninitializedParameter)
-            self.weight.materialize((
-                self.out_channels, self.in_channels // self.groups, *self.kernel_size))
+            self.weight.materialize(
+                (self.out_channels, self.in_channels // self.groups, *self.kernel_size)
+            )
             if self.bias is not None:
                 assert isinstance(self.bias, UninitializedParameter)
                 self.bias.materialize((self.out_channels,))
@@ -95,11 +96,11 @@ class LazyDepthwiseConv1d(_LazyDepthwiseConvXdMixin, nn.Conv1d):  # type: ignore
         dilation: _size_1_t = 1,
         depth_multiplier: int = 1,
         bias: bool = True,
-        padding_mode: str = 'zeros',
+        padding_mode: str = "zeros",
         device=None,
-        dtype=None
+        dtype=None,
     ) -> None:
-        factory_kwargs = {'device': device, 'dtype': dtype}
+        factory_kwargs = {"device": device, "dtype": dtype}
         super().__init__(
             0,
             0,
@@ -153,11 +154,11 @@ class LazyDepthwiseConv2d(_LazyDepthwiseConvXdMixin, nn.Conv2d):  # type: ignore
         dilation: _size_2_t = 1,
         depth_multiplier: int = 1,
         bias: bool = True,
-        padding_mode: str = 'zeros',
+        padding_mode: str = "zeros",
         device=None,
-        dtype=None
+        dtype=None,
     ) -> None:
-        factory_kwargs = {'device': device, 'dtype': dtype}
+        factory_kwargs = {"device": device, "dtype": dtype}
         super().__init__(
             0,
             0,
@@ -211,11 +212,11 @@ class LazyDepthwiseConv3d(_LazyDepthwiseConvXdMixin, nn.Conv3d):  # type: ignore
         dilation: _size_3_t = 1,
         depth_multiplier: int = 1,
         bias: bool = True,
-        padding_mode: str = 'zeros',
+        padding_mode: str = "zeros",
         device=None,
-        dtype=None
+        dtype=None,
     ) -> None:
-        factory_kwargs = {'device': device, 'dtype': dtype}
+        factory_kwargs = {"device": device, "dtype": dtype}
         super().__init__(
             0,
             0,
@@ -389,7 +390,7 @@ class LazySeparableConv2d(_SeparableConv):
             stride=stride,
             padding=padding,
             dilation=dilation,
-            depth_multiplier,
+            depth_multiplier=depth_multiplier,
             bias=bias,
             padding_mode=padding_mode,
             device=device,
@@ -491,7 +492,7 @@ class LazySeparableConv3d(_SeparableConv):
             stride=stride,
             padding=padding,
             dilation=dilation,
-            depth_multiplier,
+            depth_multiplier=depth_multiplier,
             bias=bias,
             padding_mode=padding_mode,
             device=device,
