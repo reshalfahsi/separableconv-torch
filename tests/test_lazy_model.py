@@ -31,6 +31,8 @@ def test_lazy_model1d():
             nn.LazySeparableConv1d(40, 3, padding=1, stride=2, depth_multiplier=0.5),
             nn.LazySeparableConv1d(48, 3, padding=1, stride=2),
         )
+
+        output = model(input)
     except Exception as e:
         error_message = str(e)
 
@@ -62,6 +64,8 @@ def test_lazy_model2d():
             nn.LazySeparableConv2d(40, 3, padding=1, stride=2, depth_multiplier=0.5),
             nn.LazySeparableConv2d(48, 3, padding=1, stride=2),
         )
+
+        output = model(input)
     except Exception as e:
         error_message = str(e)
 
@@ -93,6 +97,8 @@ def test_lazy_model3d():
             nn.LazySeparableConv3d(40, 3, padding=1, stride=2, depth_multiplier=0.5),
             nn.LazySeparableConv3d(48, 3, padding=1, stride=2),
         )
+
+        output = model(input)
     except Exception as e:
         error_message = str(e)
 

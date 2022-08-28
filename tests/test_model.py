@@ -31,6 +31,8 @@ def test_model1d():
             nn.SeparableConv1d(32, 40, 3, padding=1, stride=2, depth_multiplier=0.5),
             nn.SeparableConv1d(40, 48, 3, padding=1, stride=2),
         )
+
+        output = model(input)
     except Exception as e:
         error_message = str(e)
 
@@ -62,6 +64,8 @@ def test_model2d():
             nn.SeparableConv2d(32, 40, 3, padding=1, stride=2, depth_multiplier=0.5),
             nn.SeparableConv2d(40, 48, 3, padding=1, stride=2),
         )
+
+        output = model(input)
     except Exception as e:
         error_message = str(e)
 
@@ -93,6 +97,8 @@ def test_model3d():
             nn.SeparableConv3d(32, 40, 3, padding=1, stride=2, depth_multiplier=0.5),
             nn.SeparableConv3d(40, 48, 3, padding=1, stride=2),
         )
+
+        output = model(input)
     except Exception as e:
         error_message = str(e)
 

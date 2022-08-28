@@ -53,11 +53,6 @@ class _LazyDepthwiseConvXdMixin(LazyModuleMixin):
             self.out_channels = max(
                 self.in_channels * int(depth_multiplier), self.in_channels
             )
-            warnings.warn(
-                "{}, {}, {}".format(
-                    self.in_channels, depth_multiplier, self.out_channels
-                )
-            )
             if self.in_channels * depth_multiplier != self.out_channels:
                 raise ValueError("depth_multiplier must be integer>=1")
             self.groups = self.in_channels
