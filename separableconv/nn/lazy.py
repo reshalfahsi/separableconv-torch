@@ -19,7 +19,7 @@ from torch.nn.parameter import UninitializedParameter
 from torch.nn.modules.lazy import LazyModuleMixin
 from torch.nn.common_types import _size_1_t, _size_2_t, _size_3_t
 
-from typing import Callable, Union
+from typing import Callable, Union, Tuple
 from separableconv.nn.base import _SeparableConv
 
 
