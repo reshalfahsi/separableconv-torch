@@ -49,7 +49,7 @@ class _LazyDepthwiseConvXdMixin(LazyModuleMixin):
         if self.has_uninitialized_params():  # type: ignore[misc]
             self.in_channels = input.shape[1]
             depth_multiplier = self.out_channels
-            self.out_channels *= input.shape[1]
+            self.out_channels = max(input.shape[1] * int(depth_multiplier), input.shape[1])
             if self.in_channels * depth_multiplier != self.out_channels:
                 raise ValueError("depth_multiplier must be integer>=1")
             self.groups = input.shape[1]
@@ -108,7 +108,7 @@ class LazyDepthwiseConv1d(_LazyDepthwiseConvXdMixin, nn.Conv1d):  # type: ignore
             stride,
             padding,
             dilation,
-            0,
+            1,
             # bias is hardcoded to False to avoid creating tensor
             # that will soon be overwritten.
             False,
@@ -166,7 +166,7 @@ class LazyDepthwiseConv2d(_LazyDepthwiseConvXdMixin, nn.Conv2d):  # type: ignore
             stride,
             padding,
             dilation,
-            0,
+            1,
             # bias is hardcoded to False to avoid creating tensor
             # that will soon be overwritten.
             False,
@@ -224,7 +224,7 @@ class LazyDepthwiseConv3d(_LazyDepthwiseConvXdMixin, nn.Conv3d):  # type: ignore
             stride,
             padding,
             dilation,
-            0,
+            1,
             # bias is hardcoded to False to avoid creating tensor
             # that will soon be overwritten.
             False,
