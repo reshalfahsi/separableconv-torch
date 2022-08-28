@@ -19,7 +19,7 @@ An illustration of Depthwise Separable Convolution. Credit: [Depthwise Convoluti
   <a href="https://github.com/reshalfahsi/separableconv-torch/actions/workflows/package.yml"><img src="https://github.com/reshalfahsi/separableconv-torch/actions/workflows/package.yml/badge.svg" alt="package testing"></a>
 </div>
 
-PyTorch (unofficial) implementation of Depthwise Separable Convolution. This type of convolution is introduced by Chollet in [Xception: Deep Learning With Depthwise Separable Convolutions](https://arxiv.org/abs/1610.02357). This package provides ``SeparableConv1d``, ``SeparableConv2d``, and ``SeparableConv3d``. 
+PyTorch (unofficial) implementation of Depthwise Separable Convolution. This type of convolution is introduced by Chollet in [Xception: Deep Learning With Depthwise Separable Convolutions](https://arxiv.org/abs/1610.02357). This package provides ``SeparableConv1d``, ``SeparableConv2d``, ``SeparableConv3d``, ``LazySeparableConv1d``, ``LazySeparableConv2d``, and ``LazySeparableConv3d``. 
 
 
 ## Installation
