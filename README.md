@@ -135,3 +135,22 @@ output = m(input)
 ```
 </details>
 
+
+<details closed>
+<summary>For lazy 2-dimensional case.</summary>
+
+
+```python
+import torch
+import separableconv.nn as nn
+
+# set input
+input = torch.randn(4, 10, 100, 100)
+
+# define model
+m = nn.LazySeparableConv2d(30, 3)
+
+# process input through model
+output = m(input)
+```
+</details>
